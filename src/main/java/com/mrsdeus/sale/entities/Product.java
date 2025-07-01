@@ -1,11 +1,26 @@
 package com.mrsdeus.sale.entities;
 
 import com.mrsdeus.sale.enums.ClothesEnum;
-import jakarta.persistence.*;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.UUID;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "product")
 public class Product {
@@ -25,48 +40,4 @@ public class Product {
     private List<Attachment> images;
 
     private ClothesEnum category_product;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public List<Attachment> getImages() {
-        return images;
-    }
-
-    public void setImages(List<Attachment> images) {
-        this.images = images;
-    }
-
-    public ClothesEnum getCategory_product() {
-        return category_product;
-    }
-
-    public void setCategory_product(ClothesEnum category_product) {
-        this.category_product = category_product;
-    }
 }

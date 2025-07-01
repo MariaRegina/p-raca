@@ -18,7 +18,7 @@ public class Attachment {
 
     private String path;
 
-    private Base64 base64;
+//    private Base64 base64;
 
     public UUID getId() {
         return id;
@@ -31,12 +31,12 @@ public class Attachment {
     public void setPath(String path) {
         this.path = path;
     }
-
-    public Base64 getBase64() {
-        return base64;
-    }
-
-    public void setBase64(Base64 base64) {
-        this.base64 = base64;
-    }
+//
+//    public Base64 getBase64() {
+//        return base64;
+//    }
+//
+//    public void setBase64(Base64 base64) {
+//        this.base64 = base64;
+//    }
 }

@@ -33,19 +33,19 @@ public class PersonController {
     }
 
     @POST
-    public Response createPerson(Person person, Address address, Document document){
-        iPerson.save(person);
-        iAddress.save(address);
-        iDocument.save(document);
-        return Response.created(null).build();
+    public Response createPerson(PersonRequest personRequest){
+        Person person = personRequest.getPerson();
+        Address address = personRequest.getAddress();
+        Document document = personRequest.getDocument();
+
+        return Response.ok().build();
     }
 
     @PUT
-    public void updatePerson(Person person, Address address, Document document){
-        iPerson.save(person);
-        iPerson.save(person);
-        iAddress.save(address);
-        iDocument.save(document);
+    public void updatePerson(PersonRequest personRequest){
+        iPerson.save(personRequest.getPerson());
+        iAddress.save(personRequest.getAddress());
+        iDocument.save(personRequest.getDocument());
     }
 
     @DELETE

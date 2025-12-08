@@ -1,4 +1,4 @@
-package com.mrsdeus.panel.access;
+package com.mrsdeus.security.entities;
 
 import com.mrsdeus.panel.persistence.entities.User;
 import jakarta.persistence.*;

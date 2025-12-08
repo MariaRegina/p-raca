@@ -9,6 +9,7 @@ import com.mrsdeus.praca.persistence.repository.IAddress;
 import com.mrsdeus.praca.persistence.repository.IDocument;
 import com.mrsdeus.praca.persistence.repository.IPerson;
 import io.quarkus.security.Authenticated;
+import jakarta.annotation.security.PermitAll;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
@@ -46,6 +47,7 @@ public class PersonController {
     }
 
     @PUT
+    @PermitAll
     public Response createPerson( PersonRequest personRequest){
         User user = personRequest.getUser();
         user = iUser.save(user);

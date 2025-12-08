@@ -12,7 +12,7 @@ import org.eclipse.microprofile.jwt.JsonWebToken;
 import java.util.UUID;
 
 @Path("/user")
-@Authenticated
+@PermitAll
 public class UserController {
 
     @Inject

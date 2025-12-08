@@ -39,4 +39,7 @@ public class Product implements Serializable {
 
     @OneToMany
     private List<Color> colors;
+
+    @ManyToMany
+    private List<ClothingSizes> clothingSizes;
 }

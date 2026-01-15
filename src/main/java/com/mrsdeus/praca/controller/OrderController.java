@@ -1,5 +1,6 @@
 package com.mrsdeus.praca.controller;
 
+import com.mrsdeus.praca.dto.OrderDto;
 import com.mrsdeus.praca.persistence.entities.Order;
 import com.mrsdeus.praca.persistence.repository.IOrder;
 import jakarta.inject.Inject;
@@ -15,8 +16,13 @@ public class OrderController {
 
     @POST
     @Path("/new-order")
-    public Order newOrder(Order order){
-        iOrder.save(order);
-        return order;
+    public Order newOrder(OrderDto dto){
+        //todo
+        //valida pagamento
+
+        System.out.println(dto.getSlug());
+        System.out.println(dto.getSize());
+        System.out.println(dto.getAmount());
+        return new Order();
     }
 }

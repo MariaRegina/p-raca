@@ -18,7 +18,4 @@ public class Cart {
     @OneToOne
     private Person person;
 
-    @OneToMany
-    private List<ItemCart> itens;
-
 }

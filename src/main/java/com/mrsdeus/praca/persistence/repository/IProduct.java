@@ -10,6 +10,6 @@ import java.util.UUID;
 
 public interface IProduct extends JpaRepository<Product, UUID> {
     public List<Product> findByCategory_name(@Param("name") String name, Pageable pageable);
-
+    public Product findBySlug(String slug);
     public Product findByCategory_nameAndSlug(@Param("name") String name, @Param("slug")String slug);
 }

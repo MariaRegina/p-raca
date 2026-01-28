@@ -9,11 +9,14 @@ import com.mrsdeus.praca.persistence.repository.ICart;
 import com.mrsdeus.praca.persistence.repository.ICartItem;
 import com.mrsdeus.praca.persistence.repository.IPerson;
 import com.mrsdeus.praca.persistence.repository.IProduct;
+import com.mrsdeus.praca.persistence.services.CartService;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -21,7 +24,7 @@ import java.util.UUID;
 public class CartController {
 
     @Inject
-    ICart cartService;
+    ICart iCart;
 
     @Inject
     IProduct iProduct;
@@ -33,7 +36,8 @@ public class CartController {
     ICartItem iCartItem;
 
     @Inject
-    com.mrsdeus.praca.persistence.repository.ICart iCart;
+    CartService cartService;
+
 
     @Inject
     JsonWebToken jwt;
@@ -55,7 +59,7 @@ public class CartController {
             throw new RuntimeException("Produto nao encontrado");
         }
 
-        Cart cart = (Cart) cartService.findByPerson_id(person.get().getId());
+        Cart cart = iCart.findByPerson_id(person.get().getId());
         if(cart == null){
             cart = new Cart();
             cart.setPerson(person.get());
@@ -78,10 +82,16 @@ public class CartController {
         return cart;
     }
 
-    @POST
-    @Path("/get-cart")
-    public Cart getCart(){
-        UUID usuarioLogado = UUID.fromString(jwt.getClaim("user-id"));
-        return cartService.findByPerson_id(usuarioLogado);
+    @GET
+    @Path("/products")
+    public List<Product> getProdutsInCart(){
+        //todo
+//        UUID usuarioLogado = UUID.randomUUID();
+//        UUID usuarioLogado = UUID.fromString(jwt.getClaim("user-id"));
+        UUID usuarioLogado = iPerson.findByUser_email("santosdedeusm@gmail.com").get().getId();
+        if(usuarioLogado == null){
+            throw new RuntimeException("Usuario nao encontrado");
+        }
+        return cartService.getProdutsInCart(usuarioLogado);
     }
 }

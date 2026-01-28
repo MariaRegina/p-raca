@@ -3,9 +3,11 @@ package com.mrsdeus.praca.controller;
 import com.mrsdeus.panel.persistence.entities.User;
 import com.mrsdeus.panel.persistence.repositories.IUser;
 import com.mrsdeus.praca.persistence.entities.Address;
+import com.mrsdeus.praca.persistence.entities.Cart;
 import com.mrsdeus.praca.persistence.entities.Document;
 import com.mrsdeus.praca.persistence.entities.Person;
 import com.mrsdeus.praca.persistence.repository.IAddress;
+import com.mrsdeus.praca.persistence.repository.ICart;
 import com.mrsdeus.praca.persistence.repository.IDocument;
 import com.mrsdeus.praca.persistence.repository.IPerson;
 import io.quarkus.security.Authenticated;
@@ -32,6 +34,9 @@ public class PersonController {
     IDocument iDocument;
 
     @Inject
+    ICart iCart;
+
+    @Inject
     IUser iUser;
 
     @GET
@@ -49,6 +54,8 @@ public class PersonController {
     @PUT
     @PermitAll
     public Response createPerson( PersonRequest personRequest){
+        //todo
+        //validar itens
         User user = personRequest.getUser();
         user = iUser.save(user);
 
@@ -58,6 +65,10 @@ public class PersonController {
 
         person.setUser(user);
         person = iPerson.save(person);
+
+        Cart cart = new Cart(person);
+        iCart.save(cart);
+
         if(address != null){
             address.setPerson(person);
             iAddress.save(address);

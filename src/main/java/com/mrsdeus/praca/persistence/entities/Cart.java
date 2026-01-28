@@ -18,4 +18,10 @@ public class Cart {
     @OneToOne
     private Person person;
 
+    public Cart(){}
+
+    public Cart(Person person){
+        this.person = person;
+    }
+
 }

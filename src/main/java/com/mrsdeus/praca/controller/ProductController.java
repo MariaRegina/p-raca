@@ -1,12 +1,11 @@
 package com.mrsdeus.praca.controller;
 
 import com.mrsdeus.praca.persistence.entities.Product;
-import com.mrsdeus.praca.persistence.repository.IProduct;
+import com.mrsdeus.praca.persistence.repository.ProductRepository;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import jakarta.ws.rs.QueryParam;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
@@ -15,24 +14,16 @@ import java.util.List;
 public class ProductController {
 
     @Inject
-    IProduct iProduct;
+    ProductRepository productRepository;
 
     @GET
-    public List<Product> getProducts(){
-//        Pageable firstPageWithTwoElements = PageRequest.of(0, 50);
-        return (List<Product>) iProduct.findAll();
-    }
-
-    @GET
-    @Path("/{category}")
-    public List<Product> getProductById(@Param("category") String category){
-        Pageable firstPageWithTwoElements = PageRequest.of(0, 50);
-        return iProduct.findByCategory_name(category, firstPageWithTwoElements);
+    public List<Product> getProductById(@QueryParam("category") String category){
+        return productRepository.findByCategory_name(category);
     }
 
     @GET
     @Path("/{slug}")
     public Product findByCategoyAndSlug(@Param("category") String category, @Param("slug") String slug){
-        return iProduct.findBySlug(slug);
+        return productRepository.findBySlug(slug);
     }
 }

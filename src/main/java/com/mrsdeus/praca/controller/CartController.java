@@ -8,7 +8,7 @@ import com.mrsdeus.praca.persistence.entities.Product;
 import com.mrsdeus.praca.persistence.repository.ICart;
 import com.mrsdeus.praca.persistence.repository.ICartItem;
 import com.mrsdeus.praca.persistence.repository.IPerson;
-import com.mrsdeus.praca.persistence.repository.IProduct;
+import com.mrsdeus.praca.persistence.repository.ProductRepository;
 import com.mrsdeus.praca.persistence.services.CartService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
@@ -27,7 +27,7 @@ public class CartController {
     ICart iCart;
 
     @Inject
-    IProduct iProduct;
+    ProductRepository productRepository;
 
     @Inject
     IPerson iPerson;
@@ -52,7 +52,7 @@ public class CartController {
             throw new RuntimeException("Usuario nao encontrado");
         }
 
-        Product product = iProduct.findBySlug(dto.getSlug());
+        Product product = productRepository.findBySlug(dto.getSlug());
 
         if(product == null){
             //todo
